@@ -1,0 +1,48 @@
+﻿@using StudentManagamentSystemBasic.ViewModels
+@model studentViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<a class="btn btn-primary" asp-controller="classSection" asp-action="Create" role="button">Create</a>
+<table class="table">
+
+    <thead>
+        <tr>
+            <th scope="col">Section Name</th>
+            <th scope="col">Year</th>
+            <th scope="col">No. of students</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.listofclasssections)
+        {
+            var count = 0;
+            <tr>
+                <td>@item.SectionName</td>
+                <td>@item.Year</td>
+                @foreach(var student in Model.listofstudents)
+                {
+                    if (student.classSectionId == item.Id)
+                    {
+                        count++;
+                    }  
+                }
+                <td>@count</td>
+                <td>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a class="btn btn-primary" asp-controller="classSection" asp-action="Details" asp-route-id="@item.Id" role="button">View</a>
+                        <a class="btn btn-info" asp-controller="classSection" asp-action="Edit" asp-route-id="@item.Id" role="button">Edit</a>
+                    </div>
+                </td>
+
+
+            </tr>
+
+        }
+
+    </tbody>
+</table>
+

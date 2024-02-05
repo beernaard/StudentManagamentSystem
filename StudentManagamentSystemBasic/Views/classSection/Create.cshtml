@@ -1,0 +1,28 @@
+﻿@using StudentManagamentSystemBasic.ViewModels
+@model classSectionViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="card" style="width: 39rem;">
+    <div class="card-body">
+        <form method="post" asp-action="Create">
+            <div class="mb-3">
+                <label asp-for="SectionName" class="form-label">First Name</label>
+                <input asp-for="SectionName" type="text" class="form-control">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label asp-for="Year" class="form-label">Sex</label>
+                <select asp-for="Year" id="inputState" class="form-select">
+                    <option>Choose...</option>
+                    <option>First Year</option>
+                    <option>Second Year</option>
+                    <option>Third Year</option>
+                    <option>Fourth Year</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+﻿@using StudentManagamentSystemBasic.ViewModels
+@model studentViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<form method="post" asp-action="Edit">
+    <input type="hidden" value="id">
+    <div class="mb-3">
+        <label asp-for="FirstName" class="form-label">First Name</label>
+        <input type="text" class="form-control" asp-for="FirstName">
+    </div>
+    <div class="mb-3">
+        <label asp-for="LastName" class="form-label">Last Name</label>
+        <input type="text" class="form-control" asp-for="LastName">
+    </div>
+    <div class="col-md-4 mb-3">
+        <label asp-for="Sex" class="form-label">Sex</label>
+        <select asp-for="Sex" id="inputState" class="form-select">
+            <option>Female</option>
+            <option>Male</option>
+        </select>
+    </div>
+    <div class="col-md-4 mb-3">
+        <label asp-for="Year" class="form-label">Year</label>
+        <select asp-for="Year" id="changeYear" class="form-select">
+            <option value="">Choose...</option>
+            <option>First Year</option>
+            <option>Second Year</option>
+            <option>Third Year</option>
+            <option>Fourth Year</option>
+        </select>
+    </div>
+    <div class="col-md-4 mb-3">
+        <label asp-for="SectionName" class="form-label">section name</label>
+        <select asp-for="SectionName" id="sectiontest" class="form-select">
+            <option>Choose...</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            getSectionByYear();
+        });
+        $("#changeYear").change(function () {
+            getSectionByYear();
+        });
+        var getSectionByYear = function () {
+            $.ajax({
+                url: '@Url.Action("sectionlist", "Student")',
+                type: 'GET',
+                data: {
+                    val: $("#changeYear").val(),
+                },
+                success: function (data) {
+                    $('#sectiontest').find('option').remove()
+                    $(data).each(
+                        function (index, item) {
+                            $("#sectiontest").append("<option>" + item.sectionName + "</option>")
+                            console.log(item)
+                        }
+                    );
+                }
+            })
+        }
+    </script>
+}
+
